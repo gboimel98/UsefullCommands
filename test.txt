@@ -1,3 +1,4 @@
 "Noder hi from master!" 
 "Noder hi from testing!" 
 "Whats up, testing?" 
+"All is fine, how are you? testing" 
