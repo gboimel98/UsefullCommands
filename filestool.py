@@ -2,28 +2,55 @@ import os
 import shutil
 
 
-def read_exist_file(fullpath, name):
-    with open(f'{fullpath}\\{name}', "r") as file:
-        return file.read()
+def check_if_file_exists(full_path, name):
+    return os.path.exists(f'{full_path}\\{name}')
 
 
-def create_file(fullpath, name):
-    with open(f'{fullpath}\\{name}', "w+") as file:
-        return file.write("")
+def read_exist_file(full_path, name):
+    with open(f'{full_path}\\{name}', "r") as file:
+        file.read()
 
 
-def write_to_file(fullpath, name, content):
-    with open(f'{fullpath}\\{name}', "w+") as file:
-        return file.write(content)
+def create_file(full_path, name):
+    with open(f'{full_path}\\{name}', "w+") as file:
+        file.write("")
 
 
-def remove_file(fullpath, name):
-    return os.remove(f'{fullpath}\\{name}')
+def edit_file_content(full_path, name, content):
+    with open(f'{full_path}\\{name}', "w+") as file:
+        file.write(content + " \n")
 
 
-def move_file(fullpath, dstpath, name):
-    return shutil.move(f'{fullpath}\\{name}', f'{dstpath}\\{name}')
+def add_content_to_file(full_path, name, content):
+    with open(f'{full_path}\\{name}', "a+") as file:
+        file.write(content + " \n")
 
 
-def rename_file(fullpath, oldname, newname):
-    return shutil.move(f'{fullpath}\\{oldname}', f'{fullpath}\\{newname}')
+def remove_file(full_path, name):
+    os.remove(f'{full_path}\\{name}')
+
+
+def move_file(full_path, dst_path, name):
+    shutil.move(f'{full_path}\\{name}', f'{dst_path}\\{name}')
+
+
+def rename_file(full_path, old_name, new_name):
+    shutil.move(f'{full_path}\\{old_name}', f'{full_path}\\{new_name}')
+
+
+def run_file(full_path, name):
+    os.system(f'{full_path}\\{name}')
+
+
+def search_on_file(full_path, name, content):
+    with open(f'{full_path}\\{name}', "r") as file:
+        search = file.read()
+        lines = []
+        for line in search.split('\n'):
+            if content in line:
+                lines.append(line)
+        return lines
+
+
+def copy_file(full_path, dst_path, origin_name, new_name):
+    shutil.copy(f'{full_path}\\{origin_name}', f'{dst_path}\\{new_name}')
